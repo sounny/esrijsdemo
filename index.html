@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2022 by anonymous (http://jsbin.com/wemipujuze/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+  <html>
+  <head>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.5/"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>DevLabs - Create a 2D map with a feature layer</title>
+    <style>
+      html, body, #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+    <script>
+  require([
+      "esri/Map",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(Map, MapView) {
+
+    var map = new Map({
+      basemap: "dark-gray-vector"
+    });
+
+    var view = new MapView({
+      container: "viewDiv",
+      map: map
+    });
+  });
+      require([
+  "esri/Map",
+  "esri/views/MapView",
+  //*** ADD ***//
+  "esri/layers/FeatureLayer",
+  "dojo/domReady!"
+], function(Map, MapView, FeatureLayer) {
+
+  var map = new Map({
+    basemap: "dark-gray-vector"
+  });
+
+  //*** ADD ***//
+  var featureLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Union_HQ_Locations/FeatureServer"
+  });
+
+  map.add(featureLayer);
+
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-118.24368,34.05293],
+  zoom: 9
+  });
+});
+
+</script>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
